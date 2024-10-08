@@ -32,12 +32,14 @@ for deck_summary in deck_list["results"]:
 
     for card in deck["cards"]:
         zone_e = main_zone_e
-        included_in_deck = False
-        for category_name in card["categories"]:
-            category = categories[category_name]
-            included_in_deck = included_in_deck or category["includedInDeck"]
-            if category["name"].lower() == "sideboard":
-                zone_e = side_zone_e
+        included_in_deck = True
+        if card["categories"] is not None:
+            for category_name in card["categories"]:
+                category = categories[category_name]
+                if not category["includedInDeck"]:
+                	included_in_deck = False
+                if category["name"].lower() == "sideboard":
+                    zone_e = side_zone_e
         if not included_in_deck:
             continue
         card_e = ET.SubElement(zone_e, "card")
