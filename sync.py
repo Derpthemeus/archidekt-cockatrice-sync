@@ -44,8 +44,10 @@ for deck_summary in deck_list["results"]:
             continue
         card_e = ET.SubElement(zone_e, "card")
         card_e.set("number", str(card["quantity"]))
-        # FIXME is there a way to handle flip cards?
         card_name = card["card"]["oracleCard"]["name"]
+        faces = card["card"]["oracleCard"]["faces"]
+        if len(faces) > 0:
+        	card_name = faces[0]["name"]
         card_e.set("name", card_name)
 
     clean_name = re.sub("[^a-zA-Z0-9\- _]", "-", deck_summary["name"])
