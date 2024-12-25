@@ -10,7 +10,7 @@ ARCHIDEKT_USERNAME = "Derpthemeus"
 COCKATRICE_DECKS_PATH = "/home/matt/.local/share/Cockatrice/Cockatrice/decks"
 
 # TODO support pagination
-list_url = "https://archidekt.com/api/decks/cards/?orderBy=-createdAt&owner=%s&ownerexact=true&pageSize=50" % ARCHIDEKT_USERNAME
+list_url = "https://archidekt.com/api/decks/v3/?ownerUsername=%s&orderBy=-createdAt" % ARCHIDEKT_USERNAME
 
 deck_list = json.loads(urllib.request.urlopen(list_url).read())
 for deck_summary in deck_list["results"]:
